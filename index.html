@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    
+  </head>
+  <body>
+    <!-- nav bar start -->
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img src="./image/logo.png" alt="" width="50px" height="50px"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="container-fluid d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Enter your City"
+                id="location"
+              />
+            </form>
+              <button class="btn btn-outline-success" onclick="currentWeather()">
+                Search
+              </button>
+            
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- navbar end -->
+    <!-- body of website start -->
+    <div style="background-color: rgba(67, 106, 213, 0.947)">
+      <!-- current temprature and weather condition start -->
+      <div class="row">
+        <div class="col-md-6 mt-2">
+          <div class="card bg-dark text-white">
+            <img src="./image/sunny.jpeg" class="card-img" alt="..." height="467px" id="img" />
+            <div class="card-img-overlay">
+              <p class="card-text fs-4">
+                <img src="./image/location.png" alt="" height="30px" /> <span id="city"></span>
+              </p>
+              <p class="card-text fs-4 text-start">
+                <img src="./image/sun.png" alt="" height="40px" id="temp_img" /><span id="temp"></span>
+              </p>
+              <p class="card-text fs-4 text-start" id="realfeel"></p>
+              <p class="card-text fs-4 text-start" id="condition">Sunny</p>
+              <p class="card-text fs-4 text-start" id="uv">3</p>
+              <p class="card-text fs-4 text-start">
+                <img src="./image/calendar.png" alt="" height="30px" /> <span id="date">15 July,2023</span>
+              </p>
+              <p class="card-text fs-4 text-start" id="localtime">11:35 AM</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row mt-2">
+            <div class="col-sm-6">
+              <div class="card bg-dark text-white">
+                <img
+                  src="/image/gemma-evans-6uvaxT6WaSY-unsplash.jpg"
+                  class="card-img"
+                  alt="..."
+                  height="230px"
+                  width="200px"
+                />
+                <div class="card-img-overlay">
+                  <h5 class="card-title fs-2">Humidity</h5>
+                  <p class="card-text fs-3">
+                    <img src="./image/humidity.png" alt="" height="40px" /><span id="humidity">75%</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card bg-dark text-white">
+                <img
+                  src="./image/gemma-evans-6uvaxT6WaSY-unsplash.jpg"
+                  class="card-img"
+                  alt="..."
+                  height="230px"
+                  width="200px"
+                />
+                <div class="card-img-overlay">
+                  <h5 class="card-title fs-2">Wind Status</h5>
+                  <p class="card-text fs-3">
+                    <img src="./image/wind.png" alt="" height="40px" /><span id="wind_status">15 Km/h</span>
+                  </p>
+                  <p class="card-text fs-3">
+                    <img src="./image/compass.png" alt="" height="40px" /><span id="wind_dir">North</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2 mb-2">
+            <div class="col-sm-6">
+              <div class="card bg-dark text-white">
+                <img
+                  src="./image/gemma-evans-6uvaxT6WaSY-unsplash.jpg"
+                  class="card-img"
+                  alt="..."
+                  height="230px"
+                  width="200px"
+                />
+                <div class="card-img-overlay">
+                  <h5 class="card-title fs-2">AQI</h5>
+                  <p class="card-text fs-3">
+                    <img src="./image/air.png" alt="" height="40px" /> <span  class="card-text fs-3" style="color:blanchedalmond" id="index">POOR</span>
+                  </p>
+                  <div>
+                  <span id="pm2.5"class="card-text">pm2.5</span>
+                  <p class="card-text" id="pm10"style="float:right">pm10:</p>
+                </div>
+                <div>
+                  <span id="co"class="card-text">co</span>
+                  <p class="card-text" id="no2"style="float:right">no2:</p>
+                </div>
+                <div>
+                  <span id="o3"class="card-text">pm2.5</span>
+                  <p class="card-text" id="so2"style="float:right">so2:</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card bg-dark text-white">
+                <img
+                  src="./image/gemma-evans-6uvaxT6WaSY-unsplash.jpg"
+                  class="card-img"
+                  alt="..."
+                  height="230px"
+                  width="200px"
+                />
+                <div class="card-img-overlay">
+                  <h5 class="card-title fs-2">Visibility</h5>
+                  <p class="card-text fs-3" id="visibility">3KM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- current temprature and weather condition end -->
+      <!-- hourly and weekly forecast start -->
+      <div class="row mt-2">
+        <!-- hourly update start -->
+        <div
+          class="col-md-8 mb-2"
+          style="background-image: url(./image/gemma-evans-6uvaxT6WaSY-unsplash.jpg)"
+        >
+          <h5 class="text-center fs-2 text-white">Hourly Update</h5>
+          <div class="row">
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="12">6:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="24" />
+                </p>
+                <p class="card-text" id="48">22 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="13">7:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px"  id="26"/>
+                </p>
+                <p class="card-text" id="52">22 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="14">8:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="28"/>
+                </p>
+                <p class="card-text" id="56">23 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="15">9:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="30"/>
+                </p>
+                <p class="card-text" id="60">23 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="16">10:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="32"/>
+                </p>
+                <p class="card-text" id="64">25 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="17">11:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/sun.png" alt="" height="30px" id="34"/>
+                </p>
+                <p class="card-text" id="68">30 <sup>°</sup>C</p>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="18">12:00 PM</p>
+                <p class="card-text">
+                  <img src="./image/sun.png" alt="" height="30px" id="36"/>
+                </p>
+                <p class="card-text" id="72">32 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="19">1:00 PM</p>
+                <p class="card-text">
+                  <img src="./image/sun.png" alt="" height="30px" id="38"/>
+                </p>
+                <p class="card-text" id="76">32 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="20">2:00 PM</p>
+                <p class="card-text">
+                  <img src="./image/sun.png" alt="" height="30px" id="40"/>
+                </p>
+                <p class="card-text" id="80">31 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="21">3:00 AM</p>
+                <p class="card-text">
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="42"/>
+                </p>
+                <p class="card-text" id="84">28 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="22">4:00 PM</p>
+                <p class="card-text">
+                  <img src="./image/rain.png" alt="" height="30px" id="44"/>
+                </p>
+                <p class="card-text" id="88">26 <sup>°</sup>C</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="card bg-dark text-white text-center">
+                <p class="card-text" id="23">5:00 PM</p>
+                <p class="card-text">
+                  <img src="./image/rain.png" alt="" height="30px" id="46"/>
+                </p>
+                <p class="card-text" id="92">25 <sup>°</sup>C</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- hourly update end -->
+        <!-- weekly update start -->
+        <div class="col-md-4 mb-2">
+          <div class="card bg-dark text-white">
+            <img
+              src="./image/gemma-evans-6uvaxT6WaSY-unsplash.jpg"
+              class="card-img"
+              alt="..."
+            />
+            <div class="card-img-overlay">
+              <h5 class="card-title fs-2">Weekly Forecast</h5>
+              <div>
+              <div style="border: solid 1px" class="fs-5">
+                <span>
+                  <img src="./image/sun.png" alt="" height="30px" id="img1"/>
+                  <span id="day1">30 <sup>°</sup>C</span>
+                </span>
+                <p class="card-text" style="float: right" id="1">Monday</p>
+              </div>
+              <div style="border: solid 1px" class="mt-1 fs-5">
+                <span>
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="img2" />
+                  <span id="day2">27 <sup>°</sup>C</span></span
+                >
+                <p class="card-text" style="float: right" id="2">Tuesday</p>
+              </div>
+              <div style="border: solid 1px" class="mt-1 fs-5">
+                <span>
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="img3" />
+                  <span id="day3">28 <sup>°</sup>C</span></span
+                >
+                <p class="card-text" style="float: right" id="3">Wednesday</p>
+              </div>
+              <div style="border: solid 1px" class="mt-1 fs-5">
+                <span>
+                  <img src="./image/sun.png" alt="" height="30px" id="img4"/>
+                 <span id="day4"> 32 <sup>°</sup>C</span></span
+                >
+                <p class="card-text" style="float: right" id="4">Thurseday</p>
+              </div>
+              <div style="border: solid 1px" class="mt-1 fs-5">
+                <span>
+                  <img src="./image/rain.png" alt="" height="30px" id="img5"/>
+                  <span id="day5">24 <sup>°</sup>C</span></span
+                >
+                <p class="card-text" style="float: right" id="5">Friday</p>
+              </div>
+              <div style="border: solid 1px" class="mt-1 fs-5">
+                <span>
+                  <img src="./image/clouds-and-sun.png" alt="" height="30px" id="img6"/>
+                  <span id="day6">26 <sup>°</sup>C</span></span
+                >
+                <p class="card-text" style="float: right" id="6">saturday</p>
+              </div>
+              <div style="border: solid 1px" class="mt-1 fs-5">
+                <span>
+                  <img src="./image/rain.png" alt="" height="30px" id="img7"/>
+                  <span id="day7">25 <sup>°</sup>C</span></span
+                >
+                <p class="card-text" style="float: right" id="7">Sunday</p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- weekly update end -->
+      </div>
+      <!-- hourly and weekly forecast end -->
+    </div>
+    <div>
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+          <li >
+            <ul class="list-unstyled ms-auto nav justify-content-right">
+              <li class="ms-3"><a class="link-dark" href="#"><img src="./image/facebook.png"   width="24" height="24"></img></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><img src="./image/instagram.png"  width="24" height="24"></img></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><img src="./image/twitter.png"  width="24" height="24"></img></a></li>
+            </ul>
+          </li>
+        </ul>
+        <p class="text-center text-muted">© 2021 Company, Inc</p>
+      </footer>
+    </div>
+    <!-- body of website end -->
+    <script src="script.js"></script>
+  </body>
+</html>
