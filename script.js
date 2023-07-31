@@ -20,12 +20,10 @@ const search = document.querySelector("#location");
 
 const getWeather = async (city) => {
   const urlforecast = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=yes&alerts=no`;
- 
+
   const response = await fetch(urlforecast);
   const data = await response.json();
   return data;
-  
- 
 };
 function showWeather(weatherData) {
   console.log(weatherData);
@@ -213,64 +211,58 @@ function showAqi(current) {
 function currentWeather() {
   getWeather(search.value).then(showWeather);
 }
-function weatherReport(){
-  getWeather(document.getElementById('city1').value)
-    .then(showWeatherReport);
-    getWeather(document.getElementById('city2').value)
-      .then(showWeatherReport);
-  
+function weatherReport() {
+  getWeather(document.getElementById("city1").value).then(showWeatherReport);
+  getWeather(document.getElementById("city2").value).then(showWeatherReport);
 }
-var count=8
-var id=10;
-function showWeatherReport(weatherData){
-   const data=weatherData;
-   console.log(data);
-   document.getElementById(id).innerHTML= `${weatherData.location.name} , ${weatherData.location.country}`;
-  if(id==10){
+var count = 8;
+var id = 10;
+function showWeatherReport(weatherData) {
+  const data = weatherData;
+  console.log(data);
+  document.getElementById(
+    id
+  ).innerHTML = `${weatherData.location.name} , ${weatherData.location.country}`;
+  if (id == 10) {
     id++;
-  }
-  else{
+  } else {
     id--;
   }
 
-  for(let i=0;i<7;i++){
-    const data=weatherData.forecast.forecastday[i].day;
-   
-   const humidity=data.avghumidity+"%";
-   const temp=data.avgtemp_c+"°C";
-   const Wind=data.maxwind_kph+"Km/h";
-   const a=weatherData.forecast.forecastday[i].date;
-   const d=a.slice(8,)+a.slice(4,8)+a.slice(0,4);
-   const condition=data.condition.text;
-   const rain=data.daily_chance_of_rain+"%"
-    const row=document.createElement('tr');
-      const cell1 = document.createElement('td');
-      const cell2 = document.createElement('td');
-      const cell3 = document.createElement('td');
-      const cell4 = document.createElement('td');
-      const cell5 = document.createElement('td');
-      const cell6 = document.createElement('td');
-      cell1.appendChild(document.createTextNode(d));
-      cell2.appendChild(document.createTextNode(temp));
-      cell3.appendChild(document.createTextNode(condition));
-      cell4.appendChild(document.createTextNode(rain));
-      cell5.appendChild(document.createTextNode(humidity));
-      cell6.appendChild(document.createTextNode(Wind));
-      row.appendChild(cell1);
-      row.appendChild(cell2);
-      row.appendChild(cell3);
-      row.appendChild(cell4);
-      row.appendChild(cell5);
-      row.appendChild(cell6);
-      document.getElementById(count).appendChild(row);
-      
+  for (let i = 0; i < 7; i++) {
+    const data = weatherData.forecast.forecastday[i].day;
 
-    }
-    if(count==8){
-      count++;      
-    }
-    else{
-      count--;
-    }
-
+    const humidity = data.avghumidity + "%";
+    const temp = data.avgtemp_c + "°C";
+    const Wind = data.maxwind_kph + "Km/h";
+    const a = weatherData.forecast.forecastday[i].date;
+    const d = a.slice(8) + a.slice(4, 8) + a.slice(0, 4);
+    const condition = data.condition.text;
+    const rain = data.daily_chance_of_rain + "%";
+    const row = document.createElement("tr");
+    const cell1 = document.createElement("td");
+    const cell2 = document.createElement("td");
+    const cell3 = document.createElement("td");
+    const cell4 = document.createElement("td");
+    const cell5 = document.createElement("td");
+    const cell6 = document.createElement("td");
+    cell1.appendChild(document.createTextNode(d));
+    cell2.appendChild(document.createTextNode(temp));
+    cell3.appendChild(document.createTextNode(condition));
+    cell4.appendChild(document.createTextNode(rain));
+    cell5.appendChild(document.createTextNode(humidity));
+    cell6.appendChild(document.createTextNode(Wind));
+    row.appendChild(cell1);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    row.appendChild(cell4);
+    row.appendChild(cell5);
+    row.appendChild(cell6);
+    document.getElementById(count).appendChild(row);
   }
+  if (count == 8) {
+    count++;
+  } else {
+    count--;
+  }
+}
