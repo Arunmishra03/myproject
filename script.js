@@ -173,11 +173,8 @@ function localTime(timezone) {
   };
   const localTimeString = d.toLocaleDateString("en-us", options);
   console.log(localTimeString);
-  document.getElementById("localtime").innerHTML = localTimeString.slice(11);
-  const date =
-    localTimeString.slice(2, 5) +
-    localTimeString.slice(0, 2) +
-    localTimeString.slice(5, 9);
+  document.getElementById("localtime").innerHTML = localTimeString.slice(10);
+  const date = localTimeString.slice(2, 4) + localTimeString.slice(0, 2) +localTimeString.slice(4, 8);
   document.getElementById("date").innerHTML = date;
 }
 function showAqi(current) {
@@ -209,7 +206,17 @@ function showAqi(current) {
 }
 
 function currentWeather() {
-  getWeather(search.value).then(showWeather);
+  let weather =  getWeatherByCityName(city);
+  // console.log(weather.cod);
+  if (weather.cod !== 200) {
+    Swal.fire({
+      icon: "error",
+      title: "OOPs.....",
+      text: "YOu entered wrong city name.",
+    });
+    return;
+  }
+  showWeather(weather);
 }
 function weatherReport() {
   getWeather(document.getElementById("city1").value).then(showWeatherReport);
