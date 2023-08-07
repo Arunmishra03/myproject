@@ -206,17 +206,10 @@ function showAqi(current) {
 }
 
 function currentWeather() {
-  let weather =  getWeatherByCityName(city);
-  // console.log(weather.cod);
-  if (weather.cod !== 200) {
-    Swal.fire({
-      icon: "error",
-      title: "OOPs.....",
-      text: "YOu entered wrong city name.",
-    });
-    return;
-  }
-  showWeather(weather);
+  let weather =  getWeatherByCityName(city).then(showWeather);
+ 
+
+  
 }
 function weatherReport() {
   getWeather(document.getElementById("city1").value).then(showWeatherReport);
