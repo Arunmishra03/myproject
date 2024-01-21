@@ -3,20 +3,7 @@ const apiKey = "036a6de1887c41d98eb05102232407";
 const form = document.querySelector("form");
 const search = document.querySelector("#location");
 
-// var lon=0,lat=0;
-// function getLocation() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(showPosition);
-//   } else {
-//     x.innerHTML = "Geolocation is not supported by this browser.";
-//   }
-// }
 
-// function showPosition(position) {
-//   lat=position.coords.latitude;
-//   lon= position.coords.longitude;
-//   console.log(lat,lon);
-// }
 
 const getWeather = async (city) => {
   const urlforecast = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=yes&alerts=no`;
@@ -72,6 +59,7 @@ function showWeather(weatherData) {
       document.getElementById("img").src = "./image/rainyday.jpg";
       break;
   }
+  console.log(weatherData.current);
   showAqi(weatherData.current);
   const day = weatherData.forecast.forecastday;
   weeklyforecast(day);
@@ -172,9 +160,14 @@ function localTime(timezone) {
     minute: "2-digit",
   };
   const localTimeString = d.toLocaleDateString("en-us", options);
-  console.log(localTimeString);
-  document.getElementById("localtime").innerHTML = localTimeString.slice(10);
-  const date = localTimeString.slice(2, 4) + localTimeString.slice(0, 2) +localTimeString.slice(4, 8);
+  const localTime=localTimeString.replace(",","")
+ 
+  document.getElementById("localtime").innerHTML = localTime.slice(10);
+  
+  console.log(localTime.split(" ")[0].split("/"));
+  const data =localTime.split(" ")[0].split("/")
+  const date = `${data[1]}/${data[0]}/${data[2]}`
+ 
   document.getElementById("date").innerHTML = date;
 }
 function showAqi(current) {
@@ -189,7 +182,7 @@ function showAqi(current) {
   const index = current.air_quality["gb-defra-index"];
   console.log(index);
   ele = document.getElementById("index");
-  console.log(ele);
+ 
   if (index > 0 && index <= 3) {
     ele.innerHTML = "LOW";
     ele.style.color = "green";
@@ -204,12 +197,8 @@ function showAqi(current) {
     ele.style.color = "#730099";
   }
 }
-
 function currentWeather() {
-  let weather =  getWeatherByCityName(city).then(showWeather);
- 
-
-  
+  getWeather(search.value).then(showWeather);
 }
 function weatherReport() {
   getWeather(document.getElementById("city1").value).then(showWeatherReport);
@@ -219,7 +208,7 @@ var count = 8;
 var id = 10;
 function showWeatherReport(weatherData) {
   const data = weatherData;
-  console.log(data);
+  
   document.getElementById(
     id
   ).innerHTML = `${weatherData.location.name} , ${weatherData.location.country}`;
@@ -228,10 +217,8 @@ function showWeatherReport(weatherData) {
   } else {
     id--;
   }
-
   for (let i = 0; i < 7; i++) {
     const data = weatherData.forecast.forecastday[i].day;
-
     const humidity = data.avghumidity + "%";
     const temp = data.avgtemp_c + "°C";
     const Wind = data.maxwind_kph + "Km/h";

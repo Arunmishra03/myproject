@@ -1,0 +1,6 @@
+.box{
+    transition: transform .2s;
+}
+.box:hover{
+    transform: scale(1.1);
+}
